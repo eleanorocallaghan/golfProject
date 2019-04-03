@@ -6,13 +6,23 @@ int fanBlowerPos = 0; // initialize variable for fanBlower's position
 int fanBlowerPin = 11; // fanBlower's wire on 'duino
 
 void setup() {
-  Serial.begin(9600);
-  fanBlower.attach(fanBlowerPin);
+  
+   fanBlower.attach(fanBlowerPin, 1, 2);
+  // fanBlower.attach(fanBlowerPin,1,2);
+   Serial.begin(9600);
+   fanBlower.writeMicroseconds(1);
+   delay(2);
+   fanBlower.writeMicroseconds(2);
+   delay(2);
+   fanBlower.writeMicroseconds(1);
+   delay(1);
 }
 
 void loop() {
 
-  fanBlower.write(3;
+  fanBlower.writeMicroseconds(2);
+   // fanBlower.write(2);
+  
   Serial.println("hello");
     
 }
