@@ -1,12 +1,12 @@
 #include <Servo.h>
 
 Servo wandDipper;  // name our servo
-Servo fanBlower; //name of motor that spins fan
+//Servo fanBlower; //name of motor that spins fan
 
 int wandDipperPos = 0;  // initialize variable for wandDipper's position
-int fanBlowerPos = 0; // initialize variable for fanBlower's position
+//int fanBlowerPos = 0; // initialize variable for fanBlower's position
 int wandDipperPin = 9; // wandDipper's wire on 'duino
-int fanBlowerPin = 11; // fanBlower's wire on 'duino
+//int fanBlowerPin = 11; // fanBlower's wire on 'duino
 int delayTimeInc = 30; //delay time for each move of one degree in ms
 int delayTimeEnd = 1000; // delay time once servo reaches 180 degrees to allow time for bubbles to be blown
 
@@ -14,7 +14,7 @@ int delayTimeEnd = 1000; // delay time once servo reaches 180 degrees to allow t
 void setup() {
   Serial.begin(9600);
   wandDipper.attach(wandDipperPin);  // attaches
-  fanBlower.attach(fanBlowerPin);
+  //fanBlower.attach(fanBlowerPin);
 }
 
 void loop() {
@@ -34,6 +34,6 @@ void loop() {
   }
 
   //fanBlower stuff
-  fanBlower.write(180);
+ // fanBlower.write(180);
     
 }
