@@ -31,7 +31,9 @@ void loop(){
   // if it is, the sensorState is LOW:
   if (sensorState == LOW) {     
     // turn LED on:
-    digitalWrite(LEDPIN, HIGH);  
+    digitalWrite(LEDPIN, HIGH);
+    delay(5000);
+    digitalWrite(LEDPIN, LOW);  
   } 
   else {
     // turn LED off:
