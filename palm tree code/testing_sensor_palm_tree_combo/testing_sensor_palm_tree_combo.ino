@@ -56,14 +56,14 @@ void loop() {
         Serial.println("  CW");
         digitalWrite(input1, HIGH);
         digitalWrite(input2, LOW);
-        delay(29000);
+        delay(28000);
       }
       else
       {
         Serial.println("  CCW");
         digitalWrite(input1, LOW);
         digitalWrite(input2, HIGH);
-        delay(29000);
+        delay(28000);
       }
       
       
