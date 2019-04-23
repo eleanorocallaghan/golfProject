@@ -58,11 +58,11 @@ Serial.println(throttle);
   }
   } 
   
- // if (sensorState && !lastState) {
+  // if (sensorState && !lastState) {
   //  Serial.println("Unbroken");
   //} 
   //if (!sensorState && lastState) {
-   // Serial.println("Broken");
+  // Serial.println("Broken");
   //}
   //lastState = sensorState;
 }
