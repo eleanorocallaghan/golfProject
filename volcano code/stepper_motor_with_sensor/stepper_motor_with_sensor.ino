@@ -30,7 +30,7 @@ void setup() {
 void loop(){
   // read the state of the pushbutton value:
   sensorState = digitalRead(SENSORPIN);
-  Serial.println(wandDipperPos);
+ // Serial.println(wandDipperPos);
   
   // check if the sensor beam is broken
   // if it is, the sensorState is LOW:
