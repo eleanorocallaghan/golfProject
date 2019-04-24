@@ -6,11 +6,11 @@
 Servo wandDipper;  // name our servo
 
 int wandDipperPos = 0;  // initialize variable for wandDipper's position
-int wandDipperPin = 9; // wandDipper's wire on 'duino
+int wandDipperPin = 10; // wandDipper's wire on 'duino
 int delayTimeInc = 30; //delay time for each move of one degree in ms
 int delayTimeEnd = 1500; // delay time once servo reaches 180 degrees to allow time for bubbles to be blown
 
-#define SERVOPIN 13
+#define SERVOPIN 10
 
 #define SENSORPIN 4
 
@@ -30,6 +30,7 @@ void setup() {
 void loop(){
   // read the state of the pushbutton value:
   sensorState = digitalRead(SENSORPIN);
+  Serial.println(wandDipperPos);
   
   // check if the sensor beam is broken
   // if it is, the sensorState is LOW:

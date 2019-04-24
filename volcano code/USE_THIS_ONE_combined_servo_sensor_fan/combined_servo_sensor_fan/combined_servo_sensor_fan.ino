@@ -31,6 +31,7 @@ pinMode(SERVOPIN, OUTPUT);
   digitalWrite(SENSORPIN, HIGH); // turn on the pullup
 
   wandDipper.attach(wandDipperPin);  // attaches
+    wandDipper.write(180);
 }
  
 void loop()
@@ -38,31 +39,32 @@ void loop()
 int throttle = analogRead(throttlePin);
 throttle = map(throttle, 0, 1023, 0, 179);
 esc.write(throttle);
-Serial.println(throttle);
+//Serial.println(throttle);
 
 // read the state of the pushbutton value:
   sensorState = digitalRead(SENSORPIN);
-  
+
+//Serial.println(wandDipperPos);
   // check if the sensor beam is broken
   // if it is, the sensorState is LOW:
   if (sensorState == LOW) {     
     // turn LED on:
-    for (wandDipperPos = 0; wandDipperPos <= 180; wandDipperPos += 1) { // servo rotates from 0 to 180 degrees in increments of one degree
+    for (wandDipperPos = 180; wandDipperPos >= 0; wandDipperPos -= 1) { // servo rotates from 0 to 180 degrees in increments of one degree
     wandDipper.write(wandDipperPos);              // servo will move to wandDipperPosition specified by variable wandDipperPos
   }
   
   delay(delayTimeEnd); //wait for bubbles to be blown by fan
   
-  for (wandDipperPos = 180; wandDipperPos >= 0; wandDipperPos -= 1) { // servo rotates from 180 to 0 degrees in increments of one degree
+  for (wandDipperPos = 0; wandDipperPos <= 180; wandDipperPos += 1) { // servo rotates from 180 to 0 degrees in increments of one degree
     wandDipper.write(wandDipperPos);              // servo will move to wandDipperPosition specified by variable wandDipperPos
   }
   } 
   
-  // if (sensorState && !lastState) {
-  //  Serial.println("Unbroken");
-  //} 
-  //if (!sensorState && lastState) {
-  // Serial.println("Broken");
-  //}
-  //lastState = sensorState;
+  if (sensorState && !lastState) {
+    Serial.println("Unbroken");
+  } 
+if (!sensorState && lastState) {
+   Serial.println("Broken");
+  }
+  lastState = sensorState;
 }
