@@ -8,7 +8,7 @@ Servo wandDipper;  // name our servo
 int wandDipperPos = 0;  // initialize variable for wandDipper's position
 int wandDipperPin = 10; // wandDipper's wire on 'duino
 int delayTimeInc = 30; //delay time for each move of one degree in ms
-int delayTimeEnd = 1500; // delay time once servo reaches 180 degrees to allow time for bubbles to be blown
+int delayTimeEnd = 750; // delay time once servo reaches 180 degrees to allow time for wand to dip
 
 #define SERVOPIN 13
 

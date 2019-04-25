@@ -9,8 +9,13 @@
 //Motor voltage source goes to L293D pin 8 and ground
 
 int dirAndSpeed;
+int num = 255;
 
 int potValue;
+
+unsigned int state = 0;
+unsigned long lastTime = 0;
+unsigned long duration = 1000;
 
 #define SENSORPIN 2 //CHECKKKKKKKKKKKKKKK
 #define LEDPIN 13
@@ -43,43 +48,80 @@ void loop() {
   // read the state of the pushbutton value:
   sensorState = digitalRead(SENSORPIN);
   Serial.println(sensorState);
+
+while (true)
+{
+  sensorState = digitalRead(SENSORPIN);
+  if (lastTime + duration < millis())
+  {
+    lastTime = millis();
+    state = !state;
+    Serial.println(state);
+    //Serial.println(millis());
+    //Serial.println(lastTime);
+    //Serial.println(duration);
+  }
+  if (state == 1)
+  {
+    duration = 500;
+    Serial.print(dirAndSpeed);
+    analogWrite(enable1, abs(num)); // set motor speed
+    Serial.println("  CW");
+    digitalWrite(input1, HIGH);
+    digitalWrite(input2, LOW);
+  }
+  if (state == 0)
+  {
+    duration = 7000;
+    Serial.println( "off");
+    digitalWrite(input1, LOW);
+    digitalWrite(input2, LOW);
+  }
+  if (sensorState == LOW)
+  {
+  break;
+  }
+}
+
   
   // check if the sensor beam is broken
   // if it is, the sensorState is LOW:
-  if (sensorState == LOW) { 
-   
-        
+  if (sensorState == LOW) 
+  {         
   Serial.print(dirAndSpeed);
-  analogWrite(enable1, abs(dirAndSpeed)); // set motor speed
+  analogWrite(enable1, abs(num)); // set motor speed
 
       if (dirAndSpeed>0)
       {
         Serial.println("  CW");
         digitalWrite(input1, HIGH);
         digitalWrite(input2, LOW);
-        delay(29000);
+        digitalWrite(LEDPIN, HIGH);
+        delay(40000); //36000
       }
       else
       {
         Serial.println("  CCW");
         digitalWrite(input1, LOW);
         digitalWrite(input2, HIGH);
-        delay(29000);
+        digitalWrite(LEDPIN, HIGH);
+        delay(40000);
       }
       
       
-      // turn LED on:
-   
-    digitalWrite(LEDPIN, HIGH);
-    
-    delay(3000);
-
+ // turn LED on:
+  //digitalWrite(LEDPIN, HIGH);
+  //delay(1500);  
+  //digitalWrite(LEDPIN, LOW);
+  //delay(4000);
+  
+    digitalWrite(LEDPIN, LOW);
     digitalWrite(input1, LOW);
     digitalWrite(input2, LOW);
     
-    delay(2000);
+ //   delay(1500);                         
     
-    digitalWrite(LEDPIN, LOW); 
+     
   }
   else {
     // turn LED off:
