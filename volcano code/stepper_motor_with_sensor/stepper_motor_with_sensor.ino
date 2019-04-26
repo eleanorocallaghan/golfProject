@@ -1,6 +1,3 @@
-/* 
-  IR Breakbeam sensor demo!
-*/
 #include <Servo.h>
 
 Servo wandDipper;  // name our servo
