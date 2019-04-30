@@ -40,29 +40,28 @@ void setup()
 void loop()
 {
   int throttle = analogRead(throttlePin);
-  throttle = map(throttle, 0, 1023, 0, 179);
-  esc.write(throttle);
-  //Serial.println(throttle);
+  throttle = map(throttle, 0, 1023, 0, 179); //convert potentiometer value to value between 0 and 180, what the motor can work with
+  esc.write(throttle); //make motor spin constantly
 
-  // read the state of the pushbutton value:
+  // read the state of the beam break sensor
   sensorState = digitalRead(SENSORPIN);
 
-  //Serial.println(wandDipperPos);
   // check if the sensor beam is broken
   // if it is, the sensorState is LOW:
   if (sensorState == LOW) {
-    // turn LED on:
-    for (wandDipperPos = 180; wandDipperPos >= 0; wandDipperPos -= 1) { // servo rotates from 0 to 180 degrees in increments of one degree
+    // move servo 180 degrees
+    for (wandDipperPos = 180; wandDipperPos >= 0; wandDipperPos -= 1) { // servo rotates from 180 to 0 degrees in increments of one degree
       wandDipper.write(wandDipperPos);              // servo will move to wandDipperPosition specified by variable wandDipperPos
     }
 
     delay(delayTimeEnd); //wait for bubbles to be blown by fan
 
-    for (wandDipperPos = 0; wandDipperPos <= 180; wandDipperPos += 1) { // servo rotates from 180 to 0 degrees in increments of one degree
+    for (wandDipperPos = 0; wandDipperPos <= 180; wandDipperPos += 1) { // servo rotates from 0 to 180 degrees in increments of one degree
       wandDipper.write(wandDipperPos);              // servo will move to wandDipperPosition specified by variable wandDipperPos
     }
   }
 
+//print state of sensor
   if (sensorState && !lastState) {
     Serial.println("Unbroken");
   }
